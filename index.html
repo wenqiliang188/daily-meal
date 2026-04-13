@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-<title>姣忔棩椋熻</title>
+<title>每日食记</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -57,7 +57,7 @@
 
   .header-logo {
     font-family: 'ZCOOL XiaoWei', serif;
-    font-size: 36px;
+    font-size: 20px;
     color: #f5deb3;
     letter-spacing: 3px;
     display: flex;
@@ -66,8 +66,8 @@
   }
 
   .header-right { text-align: right; }
-  .header-date { font-size: 30px; color: rgba(245,222,179,0.6); letter-spacing: 1px; }
-  .header-clock { font-size: 34px; font-weight: 700; color: #f5deb3; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
+  .header-date { font-size: 10px; color: rgba(245,222,179,0.6); letter-spacing: 1px; }
+  .header-clock { font-size: 16px; font-weight: 700; color: #f5deb3; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
 
   /* ===== PAGE CONTAINER ===== */
   .page-container {
@@ -114,8 +114,8 @@
   }
 
   .tab-item.active { color: var(--accent); }
-  .tab-icon { font-size: 34px; line-height: 1; }
-  .tab-label { font-size: 30px; font-weight: 500; letter-spacing: 1px; }
+  .tab-icon { font-size: 22px; line-height: 1; }
+  .tab-label { font-size: 10px; font-weight: 500; letter-spacing: 1px; }
 
   .tab-item.active .tab-icon { transform: scale(1.15); }
   .tab-item.active::before {
@@ -145,7 +145,7 @@
     align-items: center;
     gap: 8px;
     font-family: 'Noto Serif SC', serif;
-    font-size: 21px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 2px;
     color: var(--text-2);
@@ -154,7 +154,7 @@
   /* ===== HOME PAGE ===== */
   .section-title {
     font-family: 'Noto Serif SC', serif;
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 700;
     letter-spacing: 3px;
     color: var(--text);
@@ -189,7 +189,7 @@
     border-radius: 20px;
     border: 2px solid var(--border);
     background: transparent;
-    font-size: 21px;
+    font-size: 13px;
     font-family: 'Noto Sans SC', sans-serif;
     font-weight: 500;
     color: var(--text-2);
@@ -219,15 +219,15 @@
 
   .r-placeholder {
     color: var(--text-3);
-    font-size: 34px;
+    font-size: 14px;
     line-height: 2;
   }
 
-  .r-placeholder .r-emoji { font-size: 52px; display: block; margin-bottom: 6px; }
+  .r-placeholder .r-emoji { font-size: 44px; display: block; margin-bottom: 6px; }
 
   .r-type {
     font-family: 'Noto Serif SC', serif;
-    font-size: 36px;
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: 12px;
     letter-spacing: 2px;
@@ -239,7 +239,7 @@
   .r-tag {
     padding: 5px 12px;
     border-radius: 20px;
-    font-size: 34px;
+    font-size: 14px;
     font-weight: 500;
     animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
@@ -274,7 +274,7 @@
     color: #fff;
     border: none;
     border-radius: 14px;
-    font-size: 36px;
+    font-size: 16px;
     font-family: 'Noto Serif SC', serif;
     font-weight: 700;
     letter-spacing: 4px;
@@ -297,7 +297,7 @@
     border-radius: 10px;
     border: 1.5px solid var(--border);
     background: transparent;
-    font-size: 21px;
+    font-size: 13px;
     font-family: 'Noto Sans SC', sans-serif;
     color: var(--text-2);
     cursor: pointer;
@@ -330,9 +330,9 @@
     flex-shrink: 0;
   }
 
-  .today-meal-label { font-size: 36px; color: var(--text-2); width: 36px; flex-shrink: 0; font-weight: 500; }
-  .today-meal-content { flex: 1; font-size: 34px; color: var(--text); line-height: 1.5; }
-  .today-meal-empty { font-size: 21px; color: var(--text-3); }
+  .today-meal-label { font-size: 12px; color: var(--text-2); width: 36px; flex-shrink: 0; font-weight: 500; }
+  .today-meal-content { flex: 1; font-size: 14px; color: var(--text); line-height: 1.5; }
+  .today-meal-empty { font-size: 13px; color: var(--text-3); }
 
   /* Stats */
   .stats-row {
@@ -350,8 +350,8 @@
     text-align: center;
   }
 
-  .stat-val { font-family: 'Noto Serif SC', serif; font-size: 34px; font-weight: 700; color: var(--accent); }
-  .stat-lbl { font-size: 19px; color: var(--text-3); margin-top: 2px; letter-spacing: 1px; }
+  .stat-val { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; color: var(--accent); }
+  .stat-lbl { font-size: 11px; color: var(--text-3); margin-top: 2px; letter-spacing: 1px; }
 
   /* ===== CALENDAR PAGE ===== */
   .month-nav {
@@ -363,7 +363,7 @@
 
   .month-title {
     font-family: 'Noto Serif SC', serif;
-    font-size: 36px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 2px;
   }
@@ -374,7 +374,7 @@
     border-radius: 50%;
     border: 1.5px solid var(--border);
     background: transparent;
-    font-size: 36px;
+    font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -393,7 +393,7 @@
 
   .wd-label {
     text-align: center;
-    font-size: 30px;
+    font-size: 10px;
     color: var(--text-3);
     font-weight: 500;
     letter-spacing: 0;
@@ -421,7 +421,7 @@
     cursor: pointer;
     transition: all 0.15s;
     position: relative;
-    font-size: 21px;
+    font-size: 13px;
     font-weight: 500;
     gap: 1px;
   }
@@ -465,15 +465,15 @@
 
   .day-card-date {
     font-family: 'Noto Serif SC', serif;
-    font-size: 34px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 1px;
   }
 
-  .day-card-weekday { font-size: 19px; color: var(--text-3); margin-top: 1px; }
+  .day-card-weekday { font-size: 11px; color: var(--text-3); margin-top: 1px; }
 
   .day-card-badge {
-    font-size: 30px;
+    font-size: 10px;
     padding: 2px 8px;
     border-radius: 10px;
     background: var(--accent);
@@ -488,27 +488,27 @@
     align-items: center;
     gap: 8px;
     padding: 5px 0;
-    font-size: 21px;
+    font-size: 13px;
   }
 
   .meal-mini-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .meal-mini-label { font-size: 19px; font-weight: 500; width: 32px; flex-shrink: 0; color: var(--text-3); }
+  .meal-mini-label { font-size: 11px; font-weight: 500; width: 32px; flex-shrink: 0; color: var(--text-3); }
   .meal-mini-food { color: var(--text); flex: 1; line-height: 1.4; }
 
-  .no-meals-hint { font-size: 21px; color: var(--text-3); text-align: center; padding: 8px 0; }
+  .no-meals-hint { font-size: 13px; color: var(--text-3); text-align: center; padding: 8px 0; }
 
   /* ===== ADD DISH PAGE ===== */
   .add-form { padding: 16px; }
 
   .form-group { margin-bottom: 16px; }
-  .form-label { font-size: 36px; color: var(--text-2); font-weight: 500; margin-bottom: 6px; letter-spacing: 1px; }
+  .form-label { font-size: 12px; color: var(--text-2); font-weight: 500; margin-bottom: 6px; letter-spacing: 1px; }
 
   .form-input, .form-select {
     width: 100%;
     padding: 13px 14px;
     border: 1.5px solid var(--border);
     border-radius: 12px;
-    font-size: 19px;
+    font-size: 15px;
     font-family: 'Noto Sans SC', sans-serif;
     background: #fff;
     color: var(--text);
@@ -531,7 +531,7 @@
     color: #fff;
     border: none;
     border-radius: 14px;
-    font-size: 36px;
+    font-size: 16px;
     font-family: 'Noto Serif SC', serif;
     font-weight: 700;
     letter-spacing: 4px;
@@ -543,7 +543,7 @@
   .submit-btn:active { transform: scale(0.98); }
 
   .quick-add-title {
-    font-size: 21px;
+    font-size: 13px;
     color: var(--text-2);
     font-weight: 500;
     padding: 16px 0 10px;
@@ -563,7 +563,7 @@
     border-radius: 20px;
     border: 1.5px solid var(--border);
     background: #fff;
-    font-size: 21px;
+    font-size: 13px;
     font-family: 'Noto Sans SC', sans-serif;
     color: var(--text-2);
     cursor: pointer;
@@ -590,7 +590,7 @@
     border-radius: 20px;
     border: 1.5px solid var(--border);
     background: transparent;
-    font-size: 21px;
+    font-size: 13px;
     font-family: 'Noto Sans SC', sans-serif;
     color: var(--text-2);
     cursor: pointer;
@@ -605,7 +605,7 @@
   .dish-section { padding: 0 16px 12px; }
 
   .dish-section-title {
-    font-size: 36px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-3);
     letter-spacing: 2px;
@@ -624,7 +624,7 @@
     border-radius: 10px;
     border: 1px solid var(--border-light);
     background: #fff;
-    font-size: 34px;
+    font-size: 14px;
     color: var(--text);
     display: flex;
     align-items: center;
@@ -634,7 +634,7 @@
   }
 
   .dish-tag:active { background: rgba(200,75,49,0.06); border-color: var(--accent); color: var(--accent); }
-  .dish-tag .del { font-size: 36px; color: var(--text-3); margin-left: 2px; }
+  .dish-tag .del { font-size: 12px; color: var(--text-3); margin-left: 2px; }
   .dish-tag .del:hover { color: var(--accent); }
 
   /* ===== DETAIL SHEET (Bottom Sheet) ===== */
@@ -689,7 +689,7 @@
 
   .sheet-title {
     font-family: 'Noto Serif SC', serif;
-    font-size: 36px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 2px;
   }
@@ -700,7 +700,7 @@
     border-radius: 50%;
     border: 1px solid var(--border);
     background: transparent;
-    font-size: 36px;
+    font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -718,7 +718,7 @@
   .sheet-meal-section { margin-bottom: 16px; }
 
   .sheet-meal-title {
-    font-size: 36px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-2);
     letter-spacing: 2px;
@@ -735,12 +735,12 @@
     align-items: center;
     padding: 8px 0;
     border-bottom: 1px dashed var(--border-light);
-    font-size: 34px;
+    font-size: 14px;
     color: var(--text);
   }
 
   .sheet-item-name { flex: 1; }
-  .sheet-item-type { font-size: 19px; padding: 1px 7px; border-radius: 10px; margin-left: 6px; }
+  .sheet-item-type { font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-left: 6px; }
   .sheet-item-type.s { background: var(--yellow-light); color: var(--yellow); }
   .sheet-item-type.d { background: var(--green-light); color: var(--green); }
 
@@ -748,7 +748,7 @@
     background: none;
     border: none;
     color: var(--text-3);
-    font-size: 21px;
+    font-size: 13px;
     padding: 4px 8px;
     border-radius: 6px;
     cursor: pointer;
@@ -769,7 +769,7 @@
     padding: 9px 12px;
     border: 1.5px solid var(--border);
     border-radius: 10px;
-    font-size: 34px;
+    font-size: 14px;
     font-family: 'Noto Sans SC', sans-serif;
     background: #fff;
     min-width: 0;
@@ -781,7 +781,7 @@
     border: 1.5px solid var(--border);
     border-radius: 10px;
     padding: 9px 8px;
-    font-size: 36px;
+    font-size: 12px;
     background: #fff;
     color: var(--text-2);
     cursor: pointer;
@@ -794,14 +794,14 @@
     border: none;
     background: var(--green);
     color: #fff;
-    font-size: 21px;
+    font-size: 13px;
     font-family: 'Noto Sans SC', sans-serif;
     cursor: pointer;
     white-space: nowrap;
   }
 
-  .sheet-empty { text-align: center; padding: 32px 0; color: var(--text-3); font-size: 34px; }
-  .sheet-empty .empty-emoji { font-size: 56px; display: block; margin-bottom: 8px; opacity: 0.4; }
+  .sheet-empty { text-align: center; padding: 32px 0; color: var(--text-3); font-size: 14px; }
+  .sheet-empty .empty-emoji { font-size: 48px; display: block; margin-bottom: 8px; opacity: 0.4; }
 
   /* ===== TOAST ===== */
   .toast {
@@ -813,7 +813,7 @@
     color: #f5deb3;
     padding: 10px 24px;
     border-radius: 30px;
-    font-size: 21px;
+    font-size: 13px;
     font-family: 'Noto Sans SC', sans-serif;
     z-index: 999;
     opacity: 0;
@@ -836,7 +836,7 @@
 
 <!-- HEADER -->
 <header class="header">
-  <div class="header-logo">馃崪 姣忔棩椋熻</div>
+  <div class="header-logo">🍜 每日食记</div>
   <div class="header-right">
     <div class="header-date" id="hDate"></div>
     <div class="header-clock" id="hClock">--:--</div>
@@ -849,64 +849,64 @@
   <!-- ===== HOME PAGE ===== -->
   <div class="page active" id="pageHome">
     <div class="card randomizer-card">
-      <div class="card-header">馃幉 浠婂ぉ鍚冧粈涔?/div>
+      <div class="card-header">🎲 今天吃什么</div>
 
       <div class="meal-toggle">
-        <button class="meal-toggle-btn active-b" data-m="breakfast">馃寘 鏃╅</button>
-        <button class="meal-toggle-btn" data-m="lunch">鈽€锔?鍗堥</button>
-        <button class="meal-toggle-btn" data-m="dinner">馃寵 鏅氶</button>
+        <button class="meal-toggle-btn active-b" data-m="breakfast">🌅 早餐</button>
+        <button class="meal-toggle-btn" data-m="lunch">☀️ 午餐</button>
+        <button class="meal-toggle-btn" data-m="dinner">🌙 晚餐</button>
       </div>
 
       <div class="random-display" id="randomDisplay">
         <div class="r-placeholder">
-          <span class="r-emoji">馃嵔锔?/span>
-          閫夋嫨椁愭锛岀偣鍑绘寜閽?br>鐪嬬湅浠婂ぉ鍚冧粈涔?
+          <span class="r-emoji">🍽️</span>
+          选择餐次，点击按钮<br>看看今天吃什么
         </div>
       </div>
 
-      <button class="generate-btn" id="generateBtn">馃幇 浠婂ぉ鍚冧粈涔?/button>
+      <button class="generate-btn" id="generateBtn">🎰 今天吃什么</button>
 
       <div class="record-row">
-        <button class="record-btn" id="recMainBtn">馃崥 璁板叆涓婚</button>
-        <button class="record-btn" id="recDishBtn">馃ガ 璁板叆鑿滆偞</button>
+        <button class="record-btn" id="recMainBtn">🍚 记入主食</button>
+        <button class="record-btn" id="recDishBtn">🥬 记入菜肴</button>
       </div>
     </div>
 
     <!-- Today summary -->
-    <div class="section-title">馃搮 浠婃棩璁板綍</div>
+    <div class="section-title">📅 今日记录</div>
     <div class="card today-summary" id="todaySummary">
       <div class="today-meal-row">
         <div class="today-meal-dot" style="background:var(--br)"></div>
-        <div class="today-meal-label">鏃╅</div>
-        <div class="today-meal-content" id="summaryBreakfast"><span class="today-meal-empty">鏆傛棤璁板綍</span></div>
+        <div class="today-meal-label">早餐</div>
+        <div class="today-meal-content" id="summaryBreakfast"><span class="today-meal-empty">暂无记录</span></div>
       </div>
       <div class="today-meal-row">
         <div class="today-meal-dot" style="background:var(--lu)"></div>
-        <div class="today-meal-label">鍗堥</div>
-        <div class="today-meal-content" id="summaryLunch"><span class="today-meal-empty">鏆傛棤璁板綍</span></div>
+        <div class="today-meal-label">午餐</div>
+        <div class="today-meal-content" id="summaryLunch"><span class="today-meal-empty">暂无记录</span></div>
       </div>
       <div class="today-meal-row">
         <div class="today-meal-dot" style="background:var(--di)"></div>
-        <div class="today-meal-label">鏅氶</div>
-        <div class="today-meal-content" id="summaryDinner"><span class="today-meal-empty">鏆傛棤璁板綍</span></div>
+        <div class="today-meal-label">晚餐</div>
+        <div class="today-meal-content" id="summaryDinner"><span class="today-meal-empty">暂无记录</span></div>
       </div>
     </div>
 
     <!-- Stats -->
-    <div class="section-title">馃搳 鏈湀缁熻</div>
+    <div class="section-title">📊 本月统计</div>
     <div class="card">
       <div class="stats-row">
         <div class="stat-box">
           <div class="stat-val" id="sDays">0</div>
-          <div class="stat-lbl">璁板綍澶╂暟</div>
+          <div class="stat-lbl">记录天数</div>
         </div>
         <div class="stat-box">
           <div class="stat-val" id="sDishes">0</div>
-          <div class="stat-lbl">鏀跺綍鑿滃搧</div>
+          <div class="stat-lbl">收录菜品</div>
         </div>
         <div class="stat-box">
           <div class="stat-val" id="sTotal">0</div>
-          <div class="stat-lbl">鎬婚娆℃暟</div>
+          <div class="stat-lbl">总餐次数</div>
         </div>
       </div>
     </div>
@@ -915,14 +915,14 @@
   <!-- ===== CALENDAR PAGE ===== -->
   <div class="page" id="pageCalendar">
     <div class="month-nav">
-      <button class="nav-arrow" id="prevM">鈼€</button>
+      <button class="nav-arrow" id="prevM">◀</button>
       <div class="month-title" id="monthTitle"></div>
-      <button class="nav-arrow" id="nextM">鈻?/button>
+      <button class="nav-arrow" id="nextM">▶</button>
     </div>
 
     <div class="weekday-label-row">
-      <div class="wd-label">鏃?/div><div class="wd-label">涓€</div><div class="wd-label">浜?/div>
-      <div class="wd-label">涓?/div><div class="wd-label">鍥?/div><div class="wd-label">浜?/div><div class="wd-label">鍏?/div>
+      <div class="wd-label">日</div><div class="wd-label">一</div><div class="wd-label">二</div>
+      <div class="wd-label">三</div><div class="wd-label">四</div><div class="wd-label">五</div><div class="wd-label">六</div>
     </div>
 
     <div class="day-grid" id="dayGrid"></div>
@@ -932,40 +932,40 @@
 
   <!-- ===== ADD DISH PAGE ===== -->
   <div class="page" id="pageAdd">
-    <div class="section-title">馃摑 娣诲姞鑿滃搧</div>
+    <div class="section-title">📝 添加菜品</div>
     <div class="card">
       <div class="add-form">
         <div class="form-row">
           <div class="form-group">
-            <div class="form-label">椁愭</div>
+            <div class="form-label">餐次</div>
             <select class="form-select" id="fMeal">
-              <option value="breakfast">馃寘 鏃╅</option>
-              <option value="lunch">鈽€锔?鍗堥</option>
-              <option value="dinner">馃寵 鏅氶</option>
+              <option value="breakfast">🌅 早餐</option>
+              <option value="lunch">☀️ 午餐</option>
+              <option value="dinner">🌙 晚餐</option>
             </select>
           </div>
           <div class="form-group">
-            <div class="form-label">绫诲埆</div>
+            <div class="form-label">类别</div>
             <select class="form-select" id="fCat">
-              <option value="dish">馃ガ 鑿滆偞</option>
-              <option value="staple">馃崥 涓婚</option>
+              <option value="dish">🥬 菜肴</option>
+              <option value="staple">🍚 主食</option>
             </select>
           </div>
         </div>
 
         <div class="form-group">
-          <div class="form-label">鑿滃搧鍚嶇О</div>
-          <input class="form-input" id="fName" placeholder="渚嬪锛氱暘鑼勭倰铔嬨€佺孩鐑ц倝" maxlength="20">
+          <div class="form-label">菜品名称</div>
+          <input class="form-input" id="fName" placeholder="例如：番茄炒蛋、红烧肉" maxlength="20">
         </div>
 
         <div class="form-group">
-          <div class="form-label">璁板綍鏃ユ湡锛堥粯璁や粖澶╋級</div>
+          <div class="form-label">记录日期（默认今天）</div>
           <input class="form-input" type="date" id="fDate">
         </div>
 
-        <button class="submit-btn" id="submitBtn">鉁?娣诲姞鍒板閫夋睜</button>
+        <button class="submit-btn" id="submitBtn">✓ 添加到备选池</button>
 
-        <div class="quick-add-title">馃彔 蹇€熸坊鍔犲甯歌彍</div>
+        <div class="quick-add-title">🏠 快速添加家常菜</div>
         <div class="quick-chips" id="quickChips"></div>
       </div>
     </div>
@@ -973,12 +973,12 @@
 
   <!-- ===== DISHES PAGE ===== -->
   <div class="page" id="pageDishes">
-    <div class="section-title">馃摎 澶囬€夎彍鍝佸簱</div>
+    <div class="section-title">📚 备选菜品库</div>
 
     <div class="dishes-filter">
-      <button class="filter-btn active" data-m="breakfast">馃寘 鏃╅</button>
-      <button class="filter-btn" data-m="lunch">鈽€锔?鍗堥</button>
-      <button class="filter-btn" data-m="dinner">馃寵 鏅氶</button>
+      <button class="filter-btn active" data-m="breakfast">🌅 早餐</button>
+      <button class="filter-btn" data-m="lunch">☀️ 午餐</button>
+      <button class="filter-btn" data-m="dinner">🌙 晚餐</button>
     </div>
 
     <div id="dishList"></div>
@@ -988,20 +988,20 @@
 <!-- BOTTOM TAB BAR -->
 <nav class="tab-bar">
   <button class="tab-item active" data-page="Home">
-    <span class="tab-icon">馃彔</span>
-    <span class="tab-label">棣栭〉</span>
+    <span class="tab-icon">🏠</span>
+    <span class="tab-label">首页</span>
   </button>
   <button class="tab-item" data-page="Calendar">
-    <span class="tab-icon">馃搮</span>
-    <span class="tab-label">鏃ュ巻</span>
+    <span class="tab-icon">📅</span>
+    <span class="tab-label">日历</span>
   </button>
   <button class="tab-item" data-page="Add">
-    <span class="tab-icon">鉁?/span>
-    <span class="tab-label">娣诲姞</span>
+    <span class="tab-icon">✚</span>
+    <span class="tab-label">添加</span>
   </button>
   <button class="tab-item" data-page="Dishes">
-    <span class="tab-icon">馃摎</span>
-    <span class="tab-label">鑿滃搧</span>
+    <span class="tab-icon">📚</span>
+    <span class="tab-label">菜品</span>
   </button>
 </nav>
 
@@ -1011,7 +1011,7 @@
     <div class="sheet-handle"></div>
     <div class="sheet-header">
       <div class="sheet-title" id="sheetTitle"></div>
-      <button class="sheet-close" id="sheetClose">鉁?/button>
+      <button class="sheet-close" id="sheetClose">✕</button>
     </div>
     <div class="sheet-body" id="sheetBody"></div>
   </div>
@@ -1034,14 +1034,78 @@ let selDate = null;
 let _lastGen = null;
 
 // ===== DEFAULTS =====
-const DEF_BF_S = ['鐧界播','灏忕背绮?,'璞嗘祮','椴滅墰濂?,'棣掑ご','鍖呭瓙','娌规潯','鐓庨ゼ','闈㈡潯','棣勯エ','鐕曢害鐗?,'鐜夌背绯?];
-const DEF_BF_D = ['鐓浮铔?,'鐓庨浮铔?,'鑽峰寘铔?,'鑼跺彾铔?,'钂歌泲缇?,'鑲夋澗','姒ㄨ彍','鍑夋媽榛勭摐','鐣寗鐐掕泲','灏忚懕鎷岃眴鑵?];
-const DEF_LU_S = ['鐧界背楗?,'鏉傜伯楗?,'绯欑背楗?,'棣掑ご','闈㈡潯','鐐掗キ'];
-const DEF_LU_D = ['鐣寗鐐掕泲','闈掓鑲変笣','楸奸鑲変笣','瀹繚楦′竵','绯栭唻閲岃剨','绾㈢儳鑲?,'绾㈢儳鎺掗','楹诲﹩璞嗚厫','骞茬吀鍥涘璞?,'娓呯倰鏃惰敩','鍦颁笁椴?,'钂滆搲瑗垮叞鑺?,'閰歌荆鍦熻眴涓?,'鏈ㄩ』鑲?,'鍙箰楦＄繀'];
-const DEF_DI_D = ['绾㈢儳鑲?,'绯栭唻鎺掗','娓呰捀椴堥奔','閰歌彍楸?,'钂滆搲钂歌櫨','鍙箰楦＄繀','澶х洏楦?,'楸奸鑼勫瓙','骞查攨鑺辫彍','鑻︾摐鐐掕泲','浜叡鑲変笣','灏忕倰鑲?,'鐜夌背鎺掗姹?,'鑾茶棔鎺掗姹?,'钀濆崪鐗涜叐'];
-const DEF_DI_S = ['鐧界背楗?,'鏉傜伯楗?,'棣掑ご','闈㈡潯','鐑欓ゼ','楗哄瓙'];
+const DEF_BF_S = [
+  '白粥',
+  '小米粥',
+  '豆浆',
+  '鲜牛奶',
+  '馒头',
+  '包子',
+  '油条',
+  '煎饼',
+  '面条',
+  '馄饨',
+  '燕麦片',
+  '玉米糊',
+  '疙瘩汤',
+  '面片',
+];
+const DEF_BF_D = ['煮鸡蛋','煎鸡蛋','荷包蛋','茶叶蛋','蒸蛋羹','肉松','榨菜','凉拌黄瓜','番茄炒蛋','小葱拌豆腐'];
+const DEF_LU_S = ['白米饭','杂粮饭','糙米饭','馒头','面条','炒饭'];
+const DEF_LU_D = [
+  '番茄炒蛋',
+  '青椒肉丝',
+  '鱼香肉丝',
+  '宫保鸡丁',
+  '糖醋里脊',
+  '红烧肉',
+  '红烧排骨',
+  '麻婆豆腐',
+  '干煸四季豆',
+  '清炒时蔬',
+  '地三鲜',
+  '蒜蓉西兰花',
+  '酸辣土豆丝',
+  '木须肉',
+  '可乐鸡翅',
+  '白菜炖豆腐',
+  '辣椒炒肉',
+  '葱爆肉',
+  '肉段烧茄子',
+  '酱茄子',
+];
+const DEF_DI_D = [
+  '红烧肉',
+  '糖醋排骨',
+  '清蒸鲈鱼',
+  '酸菜鱼',
+  '蒜蓉蒸虾',
+  '可乐鸡翅',
+  '大盘鸡',
+  '鱼香茄子',
+  '干锅花菜',
+  '苦瓜炒蛋',
+  '京酱肉丝',
+  '小炒肉',
+  '玉米排骨汤',
+  '莲藕排骨汤',
+  '萝卜牛腩',
+  '白菜炖豆腐',
+  '辣椒炒肉',
+  '葱爆肉',
+  '肉段烧茄子',
+  '酱茄子',
+];
+const DEF_DI_S = ['白米饭','杂粮饭','馒头','面条','烙饼','饺子'];
 
-function getQuickDishes() { return ['白米饭','番茄炒蛋','青椒肉丝','红烧肉','麻婆豆腐','白菜炖豆腐','辣椒炒肉','葱爆肉','肉段烧茄子','酱茄子','疙瘩汤','面片','春饼','烧饼','可乐鸡翅','宫保鸡丁','糖醋排骨','鱼香肉丝']; }
+function getQuickDishes() {
+  return [
+    '番茄炒蛋','红烧肉','青椒肉丝','鱼香肉丝','麻婆豆腐','干煸四季豆',
+    '糖醋排骨','清蒸鲈鱼','蒜蓉西兰花','蒜蓉蒸虾','酸辣土豆丝','木须肉',
+    '可乐鸡翅','宫保鸡丁','地三鲜','鱼香茄子','京酱肉丝','小炒肉',
+    '白菜炖豆腐','酸菜鱼','苦瓜炒蛋','萝卜牛腩','红烧排骨','回锅肉'
+  ];
+}
 
 // ===== INIT =====
 function init() {
@@ -1064,9 +1128,9 @@ function init() {
 
 function tick() {
   const now = new Date();
-  const months = ['1鏈?,'2鏈?,'3鏈?,'4鏈?,'5鏈?,'6鏈?,'7鏈?,'8鏈?,'9鏈?,'10鏈?,'11鏈?,'12鏈?];
-  const days = ['鍛ㄦ棩','鍛ㄤ竴','鍛ㄤ簩','鍛ㄤ笁','鍛ㄥ洓','鍛ㄤ簲','鍛ㄥ叚'];
-  document.getElementById('hDate').textContent = `${now.getFullYear()}骞?${months[now.getMonth()]} ${now.getDate()}鏃?${days[now.getDay()]}`;
+  const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  const days = ['周日','周一','周二','周三','周四','周五','周六'];
+  document.getElementById('hDate').textContent = `${now.getFullYear()}年 ${months[now.getMonth()]} ${now.getDate()}日 ${days[now.getDay()]}`;
   document.getElementById('hClock').textContent = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
 }
 
@@ -1103,11 +1167,11 @@ function renderTodaySummary() {
     const el = document.getElementById(`summary${t.charAt(0).toUpperCase()+t.slice(1)}`);
     const items = meals[t] || [];
     if (!items.length) {
-      el.innerHTML = '<span class="today-meal-empty">鏆傛棤璁板綍</span>';
+      el.innerHTML = '<span class="today-meal-empty">暂无记录</span>';
     } else {
       const staples = items.filter(i=>i.type==='staple').map(i=>i.name);
       const dishes = items.filter(i=>i.type==='dish').map(i=>i.name);
-      el.innerHTML = [...staples,...dishes].join('銆?) || '<span class="today-meal-empty">鏆傛棤璁板綍</span>';
+      el.innerHTML = [...staples,...dishes].join('、') || '<span class="today-meal-empty">暂无记录</span>';
     }
   }
 }
@@ -1132,7 +1196,7 @@ function renderStats() {
 function renderCalendar() {
   const now = new Date();
   const today = fmtDate(now);
-  document.getElementById('monthTitle').textContent = `${curMonth}骞?${curIdx+1}鏈坄;
+  document.getElementById('monthTitle').textContent = `${curMonth}年 ${curIdx+1}月`;
 
   const first = new Date(curMonth, curIdx, 1).getDay();
   const days = new Date(curMonth, curIdx+1, 0).getDate();
@@ -1182,7 +1246,7 @@ function renderDayList() {
   const today = fmtDate(now);
   const list = document.getElementById('dayList');
   const days = new Date(curMonth, curIdx+1, 0).getDate();
-  const weekdays = ['鍛ㄦ棩','鍛ㄤ竴','鍛ㄤ簩','鍛ㄤ笁','鍛ㄥ洓','鍛ㄤ簲','鍛ㄥ叚'];
+  const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
   let html = '';
 
   for (let d = days; d >= 1; d--) {
@@ -1194,10 +1258,10 @@ function renderDayList() {
     const hasAny = (meals.breakfast?.length||0)+(meals.lunch?.length||0)+(meals.dinner?.length||0) > 0;
 
     let bodyHtml = '';
-    for (const [t,label,dot,color] of [['breakfast','鏃╅','馃寘','var(--br)'],['lunch','鍗堥','鈽€锔?,'var(--lu)'],['dinner','鏅氶','馃寵','var(--di)']]) {
+    for (const [t,label,dot,color] of [['breakfast','早餐','🌅','var(--br)'],['lunch','午餐','☀️','var(--lu)'],['dinner','晚餐','🌙','var(--di)']]) {
       const items = meals[t] || [];
       if (!items.length) continue;
-      const foods = items.map(i=>i.name).join('銆?);
+      const foods = items.map(i=>i.name).join('、');
       bodyHtml += `<div class="meal-mini-row">
         <div class="meal-mini-dot" style="background:${color}"></div>
         <div class="meal-mini-label">${label}</div>
@@ -1206,7 +1270,7 @@ function renderDayList() {
     }
 
     if (!bodyHtml) {
-      bodyHtml = '<div class="no-meals-hint">鐐瑰嚮娣诲姞浠婃棩璁板綍</div>';
+      bodyHtml = '<div class="no-meals-hint">点击添加今日记录</div>';
     }
 
     html += `<div class="day-card" data-dk="${dk}">
@@ -1215,7 +1279,7 @@ function renderDayList() {
           <div class="day-card-date">${curMonth}.${curIdx+1}.${d}</div>
           <div class="day-card-weekday">${wd}</div>
         </div>
-        ${isToday?'<span class="day-card-badge">浠婂ぉ</span>':''}
+        ${isToday?'<span class="day-card-badge">今天</span>':''}
       </div>
       <div class="day-card-body">${bodyHtml}</div>
     </div>`;
@@ -1234,11 +1298,11 @@ function renderDishList() {
   let html = '';
   if (staples.length > 0) {
     html += `<div class="dish-section">
-      <div class="dish-section-title">馃崥 涓婚 <span style="color:var(--accent);font-size:11px">${staples.length}閬?/span><div class="line"></div></div>
+      <div class="dish-section-title">🍚 主食 <span style="color:var(--accent);font-size:11px">${staples.length}道</span><div class="line"></div></div>
       <div class="dish-tags">`;
     staples.forEach(d => {
       html += `<span class="dish-tag" onclick="deleteDish('${selDishMeal}','${d.name}')">
-        ${d.name}<span class="del">鉁?/span>
+        ${d.name}<span class="del">✕</span>
       </span>`;
     });
     html += `</div></div>`;
@@ -1246,11 +1310,11 @@ function renderDishList() {
 
   if (dishes.length > 0) {
     html += `<div class="dish-section">
-      <div class="dish-section-title">馃ガ 鑿滆偞 <span style="color:var(--accent);font-size:11px">${dishes.length}閬?/span><div class="line"></div></div>
+      <div class="dish-section-title">🥬 菜肴 <span style="color:var(--accent);font-size:11px">${dishes.length}道</span><div class="line"></div></div>
       <div class="dish-tags">`;
     dishes.forEach(d => {
       html += `<span class="dish-tag" onclick="deleteDish('${selDishMeal}','${d.name}')">
-        ${d.name}<span class="del">鉁?/span>
+        ${d.name}<span class="del">✕</span>
       </span>`;
     });
     html += `</div></div>`;
@@ -1258,8 +1322,8 @@ function renderDishList() {
 
   if (p.length === 0) {
     html = `<div style="text-align:center;padding:48px 0;color:var(--text-3)">
-      <div style="font-size:48px;opacity:0.4">馃嵔锔?/div>
-      <div style="margin-top:12px;font-size:14px">杩樻病鏈夎彍鍝侊紝鍘绘坊鍔犲惂</div>
+      <div style="font-size:48px;opacity:0.4">🍽️</div>
+      <div style="margin-top:12px;font-size:14px">还没有菜品，去添加吧</div>
     </div>`;
   }
 
@@ -1271,7 +1335,7 @@ function deleteDish(mealType, name) {
   save();
   renderDishList();
   renderStats();
-  showToast(`宸插垹闄ゃ€?{name}銆峘);
+  showToast(`已删除「${name}」`);
 }
 
 // ===== BOTTOM SHEET =====
@@ -1279,10 +1343,10 @@ function openSheet(dateKey) {
   selDate = dateKey;
   const [y,m,d] = dateKey.split('-').map(Number);
   const date = new Date(y,m-1,d);
-  const weekdays = ['鍛ㄦ棩','鍛ㄤ竴','鍛ㄤ簩','鍛ㄤ笁','鍛ㄥ洓','鍛ㄤ簲','鍛ㄥ叚'];
-  const months = ['1鏈?,'2鏈?,'3鏈?,'4鏈?,'5鏈?,'6鏈?,'7鏈?,'8鏈?,'9鏈?,'10鏈?,'11鏈?,'12鏈?];
+  const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
+  const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
 
-  document.getElementById('sheetTitle').textContent = `${y}骞?{months[m-1]}${d}鏃?${weekdays[date.getDay()]}`;
+  document.getElementById('sheetTitle').textContent = `${y}年${months[m-1]}${d}日 ${weekdays[date.getDay()]}`;
   renderSheetBody(dateKey);
   document.getElementById('sheetOverlay').classList.add('active');
 }
@@ -1298,7 +1362,7 @@ function renderSheetBody(dateKey) {
   let html = '';
   let hasAny = false;
 
-  for (const [key, label, emoji, color] of [['breakfast','鏃╅','馃寘','var(--br)'],['lunch','鍗堥','鈽€锔?,'var(--lu)'],['dinner','鏅氶','馃寵','var(--di)']]) {
+  for (const [key, label, emoji, color] of [['breakfast','早餐','🌅','var(--br)'],['lunch','午餐','☀️','var(--lu)'],['dinner','晚餐','🌙','var(--di)']]) {
     const items = meals[key] || [];
     hasAny = hasAny || items.length > 0;
     const staples = items.filter(i=>i.type==='staple');
@@ -1311,37 +1375,37 @@ function renderSheetBody(dateKey) {
       </div>`;
 
     if (items.length === 0) {
-      html += `<div style="font-size:13px;color:var(--text-3);padding:6px 0;text-align:center">鏆傛棤璁板綍</div>`;
+      html += `<div style="font-size:13px;color:var(--text-3);padding:6px 0;text-align:center">暂无记录</div>`;
     } else {
       if (staples.length > 0) {
-        html += `<div style="font-size:11px;color:var(--yellow);font-weight:600;margin-bottom:4px">馃崥 涓婚</div>`;
+        html += `<div style="font-size:11px;color:var(--yellow);font-weight:600;margin-bottom:4px">🍚 主食</div>`;
         staples.forEach(item => {
           html += `<div class="sheet-item">
             <span class="sheet-item-name">${item.name}</span>
-            <span class="sheet-item-type s">涓婚</span>
-            <button class="sheet-del" onclick="delMeal('${dateKey}','${key}','${item.name}')">鉁?/button>
+            <span class="sheet-item-type s">主食</span>
+            <button class="sheet-del" onclick="delMeal('${dateKey}','${key}','${item.name}')">✕</button>
           </div>`;
         });
       }
       if (dishes.length > 0) {
-        html += `<div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:4px;margin-top:6px">馃ガ 鑿滆偞</div>`;
+        html += `<div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:4px;margin-top:6px">🥬 菜肴</div>`;
         dishes.forEach(item => {
           html += `<div class="sheet-item">
             <span class="sheet-item-name">${item.name}</span>
-            <span class="sheet-item-type d">鑿滆偞</span>
-            <button class="sheet-del" onclick="delMeal('${dateKey}','${key}','${item.name}')">鉁?/button>
+            <span class="sheet-item-type d">菜肴</span>
+            <button class="sheet-del" onclick="delMeal('${dateKey}','${key}','${item.name}')">✕</button>
           </div>`;
         });
       }
     }
 
     html += `<div class="sheet-add-form">
-      <input class="sheet-input" id="si_${key}" placeholder="娣诲姞${label}鑿滃搧" maxlength="16">
+      <input class="sheet-input" id="si_${key}" placeholder="添加${label}菜品" maxlength="16">
       <select class="sheet-add-type" id="st_${key}" style="border-color:var(--border);padding:9px 6px;font-size:12px;font-family:'Noto Sans SC'">
-        <option value="dish">馃ガ 鑿滆偞</option>
-        <option value="staple">馃崥 涓婚</option>
+        <option value="dish">🥬 菜肴</option>
+        <option value="staple">🍚 主食</option>
       </select>
-      <button class="sheet-add-btn" onclick="sheetAdd('${key}')">娣诲姞</button>
+      <button class="sheet-add-btn" onclick="sheetAdd('${key}')">添加</button>
     </div></div>`;
   }
 
@@ -1366,7 +1430,7 @@ function sheetAdd(mealType) {
   input.value = '';
   renderSheetBody(selDate);
   renderAll();
-  showToast(`鉁?宸叉坊鍔犮€?{name}銆峘);
+  showToast(`✓ 已添加「${name}」`);
 }
 
 function delMeal(dateKey, mealType, name) {
@@ -1375,7 +1439,7 @@ function delMeal(dateKey, mealType, name) {
   save();
   renderSheetBody(dateKey);
   renderAll();
-  showToast(`宸插垹闄ゃ€?{name}銆峘);
+  showToast(`已删除「${name}」`);
 }
 
 // ===== ADD DISH =====
@@ -1385,7 +1449,7 @@ function submitDish() {
   const cat = document.getElementById('fCat').value;
   const date = document.getElementById('fDate').value || fmtDate(new Date());
 
-  if (!name) { showToast('璇疯緭鍏ヨ彍鍝佸悕绉?); return; }
+  if (!name) { showToast('请输入菜品名称'); return; }
 
   const entry = { name, type: cat };
   if (!store[date]) store[date] = { breakfast:[], lunch:[], dinner:[] };
@@ -1399,7 +1463,7 @@ function submitDish() {
   document.getElementById('fName').value = '';
   renderAll();
   renderQuickChips();
-  showToast(`鉁?銆?{name}銆嶅凡娣诲姞`);
+  showToast(`✓ 「${name}」已添加`);
 }
 
 function renderQuickChips() {
@@ -1420,13 +1484,13 @@ function quickAdd(name) {
   if (!pool[mealType].find(i=>i.name===name)) pool[mealType].push({...entry});
   save();
   renderAll();
-  showToast(`鉁?銆?{name}銆嶅凡娣诲姞`);
+  showToast(`✓ 「${name}」已添加`);
 }
 
 // ===== RANDOM =====
 function generate() {
   const p = pool[selMeal] || [];
-  if (!p.length) { showToast('澶囬€夋睜涓虹┖锛岃鍏堟坊鍔犺彍鍝侊紒'); return; }
+  if (!p.length) { showToast('备选池为空，请先添加菜品！'); return; }
 
   const display = document.getElementById('randomDisplay');
   display.innerHTML = '<div class="shimmer-bg"></div>';
@@ -1444,10 +1508,10 @@ function generate() {
       selDishes.push(avail.splice(idx,1)[0]);
     }
 
-    const labels = { breakfast:'馃寘 鏃╅', lunch:'鈽€锔?鍗堥', dinner:'馃寵 鏅氶' };
+    const labels = { breakfast:'🌅 早餐', lunch:'☀️ 午餐', dinner:'🌙 晚餐' };
     let html = `<div class="r-type">${labels[selMeal]}</div><div class="r-items">`;
-    if (staple) html += `<span class="r-tag staple">馃崥 ${staple.name}</span>`;
-    selDishes.forEach(d => { html += `<span class="r-tag dish">馃ガ ${d.name}</span>`; });
+    if (staple) html += `<span class="r-tag staple">🍚 ${staple.name}</span>`;
+    selDishes.forEach(d => { html += `<span class="r-tag dish">🥬 ${d.name}</span>`; });
     html += '</div>';
 
     display.innerHTML = html;
@@ -1458,7 +1522,7 @@ function generate() {
 }
 
 function recordMain() {
-  if (!_lastGen || !_lastGen.staple) { showToast('鍏堢敓鎴愭帹鑽愬啀鏉ヨ'); return; }
+  if (!_lastGen || !_lastGen.staple) { showToast('先生成推荐再来记'); return; }
   const today = fmtDate(new Date());
   if (!store[today]) store[today] = { breakfast:[], lunch:[], dinner:[] };
   if (!store[today][_lastGen.meal]) store[today][_lastGen.meal] = [];
@@ -1467,12 +1531,12 @@ function recordMain() {
   }
   save();
   renderAll();
-  const labels = { breakfast:'鏃╅', lunch:'鍗堥', dinner:'鏅氶' };
-  showToast(`馃崥 銆?{_lastGen.staple.name}銆嶅凡璁板叆浠婂ぉ${labels[_lastGen.meal]}`);
+  const labels = { breakfast:'早餐', lunch:'午餐', dinner:'晚餐' };
+  showToast(`🍚 「${_lastGen.staple.name}」已记入今天${labels[_lastGen.meal]}`);
 }
 
 function recordDish() {
-  if (!_lastGen || !_lastGen.dishes.length) { showToast('鍏堢敓鎴愭帹鑽愬啀鏉ヨ'); return; }
+  if (!_lastGen || !_lastGen.dishes.length) { showToast('先生成推荐再来记'); return; }
   const today = fmtDate(new Date());
   if (!store[today]) store[today] = { breakfast:[], lunch:[], dinner:[] };
   if (!store[today][_lastGen.meal]) store[today][_lastGen.meal] = [];
@@ -1482,8 +1546,8 @@ function recordDish() {
   });
   save();
   renderAll();
-  const labels = { breakfast:'鏃╅', lunch:'鍗堥', dinner:'鏅氶' };
-  showToast(`馃ガ ${n}閬撹彍鑲村凡璁板叆浠婂ぉ${labels[_lastGen.meal]}`);
+  const labels = { breakfast:'早餐', lunch:'午餐', dinner:'晚餐' };
+  showToast(`🥬 ${n}道菜肴已记入今天${labels[_lastGen.meal]}`);
 }
 
 // ===== TOAST =====
