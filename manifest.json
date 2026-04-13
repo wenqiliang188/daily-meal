@@ -1,0 +1,20 @@
+{
+  "name": "每日食记",
+  "short_name": "每日食记",
+  "description": "每周食谱工具 · 随机推荐 · 本地记录",
+  "start_url": "/meal-planner-mobile.html",
+  "display": "standalone",
+  "background_color": "#faf6f0",
+  "theme_color": "#2d1f0f",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='96' fill='%232d1f0f'/><text x='256' y='310' font-size='280' text-anchor='middle'>🍜</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "lifestyle", "utilities"]
+}
