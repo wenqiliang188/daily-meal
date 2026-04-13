@@ -114,7 +114,7 @@
   }
 
   .tab-item.active { color: var(--accent); }
-  .tab-icon { font-size: 20px; line-height: 1; }
+  .tab-icon { font-size: 22px; line-height: 1; }
   .tab-label { font-size: 17px; font-weight: 500; letter-spacing: 1px; }
 
   .tab-item.active .tab-icon { transform: scale(1.15); }
@@ -331,7 +331,7 @@
   }
 
   .today-meal-label { font-size: 17px; color: var(--text-2); width: 36px; flex-shrink: 0; font-weight: 500; }
-  .today-meal-content { flex: 1; font-size: 17px; color: var(--text); line-height: 1.6; }
+  .today-meal-content { flex: 1; font-size: 17px; color: var(--text); line-height: 1.7; }
   .today-meal-empty { font-size: 17px; color: var(--text-3); }
 
   /* Stats */
@@ -350,7 +350,7 @@
     text-align: center;
   }
 
-  .stat-val { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat-val { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; color: var(--accent); }
   .stat-lbl { font-size: 17px; color: var(--text-3); margin-top: 2px; letter-spacing: 1px; }
 
   /* ===== CALENDAR PAGE ===== */
@@ -493,7 +493,7 @@
 
   .meal-mini-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .meal-mini-label { font-size: 17px; font-weight: 500; width: 32px; flex-shrink: 0; color: var(--text-3); }
-  .meal-mini-food { color: var(--text); flex: 1; line-height: 1.6; }
+  .meal-mini-food { color: var(--text); flex: 1; line-height: 1.7; }
 
   .no-meals-hint { font-size: 17px; color: var(--text-3); text-align: center; padding: 8px 0; }
 
@@ -801,7 +801,7 @@
   }
 
   .sheet-empty { text-align: center; padding: 32px 0; color: var(--text-3); font-size: 17px; }
-  .sheet-empty .empty-emoji { font-size: 20px; display: block; margin-bottom: 8px; opacity: 0.4; }
+  .sheet-empty .empty-emoji { font-size: 22px; display: block; margin-bottom: 8px; opacity: 0.4; }
 
   /* ===== TOAST ===== */
   .toast {
@@ -1322,7 +1322,7 @@ function renderDishList() {
 
   if (p.length === 0) {
     html = `<div style="text-align:center;padding:48px 0;color:var(--text-3)">
-      <div style="font-size: 20px;opacity:0.4">🍽️</div>
+      <div style="font-size: 22px;opacity:0.4">🍽️</div>
       <div style="margin-top:12px;font-size: 17px">还没有菜品，去添加吧</div>
     </div>`;
   }
