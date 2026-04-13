@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日食记 · 家庭食谱工具</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf6f0;
+    --bg-card: #fff9f0;
+    --bg-card-hover: #fff4e3;
+    --border: #e8d5b7;
+    --border-light: #f0e4d0;
+    --text-primary: #2d1f0f;
+    --text-secondary: #7a5c3a;
+    --text-muted: #b08d6a;
+    --accent: #c84b31;
+    --accent-light: #f97316;
+    --accent-warm: #e8a87c;
+    --green: #4a7c59;
+    --green-light: #e8f0ea;
+    --yellow: #d4a017;
+    --yellow-light: #fef9e7;
+    --breakfast: #e07b39;
+    --lunch: #c84b31;
+    --dinner: #7b4fa6;
+    --shadow: rgba(45, 31, 15, 0.08);
+    --shadow-md: rgba(45, 31, 15, 0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Subtle background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(200,75,49,0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(74,124,89,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 10%, rgba(212,160,23,0.04) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: linear-gradient(135deg, #2d1f0f 0%, #4a2e18 50%, #6b3f22 100%);
+    color: #fff;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    font-size: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .logo-text {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 26px;
+    letter-spacing: 4px;
+    color: #f5deb3;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: rgba(245,222,179,0.6);
+    letter-spacing: 6px;
+    margin-top: -2px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .live-time {
+    text-align: right;
+    font-family: 'Noto Serif SC', serif;
+  }
+
+  .live-date {
+    font-size: 13px;
+    color: rgba(245,222,179,0.7);
+    letter-spacing: 1px;
+  }
+
+  .live-clock {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f5deb3;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== TOP SECTION: randomizer + stats ===== */
+  .top-section {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    margin-bottom: 32px;
+    align-items: start;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 2px 16px var(--shadow);
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 18px 24px 14px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-header-icon { font-size: 20px; }
+  .card-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 2px;
+  }
+
+  /* ===== RANDOMIZER ===== */
+  .randomizer-card {
+    background: linear-gradient(145deg, #fff9f0 0%, #fdf0e0 100%);
+  }
+
+  .randomizer-body {
+    padding: 24px;
+  }
+
+  .meal-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .meal-btn {
+    flex: 1;
+    padding: 10px 12px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .meal-btn .meal-emoji { font-size: 22px; }
+  .meal-btn .meal-label { font-size: 12px; letter-spacing: 2px; }
+
+  .meal-btn.active-breakfast { border-color: var(--breakfast); background: rgba(224,123,57,0.1); color: var(--breakfast); }
+  .meal-btn.active-lunch { border-color: var(--lunch); background: rgba(200,75,49,0.1); color: var(--lunch); }
+  .meal-btn.active-dinner { border-color: var(--dinner); background: rgba(123,79,166,0.1); color: var(--dinner); }
+
+  .random-result {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .random-result.has-result {
+    border-color: var(--accent-warm);
+    box-shadow: 0 0 20px rgba(200,75,49,0.08);
+  }
+
+  .result-placeholder {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .result-placeholder .big-emoji { font-size: 48px; display: block; margin-bottom: 8px; }
+
+  .result-dish {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .result-detail {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .result-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    margin: 4px 2px;
+    font-weight: 500;
+  }
+
+  .result-tag.staple { background: var(--yellow-light); color: var(--yellow); }
+  .result-tag.dish { background: var(--green-light); color: var(--green); }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.6) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(200,75,49,0.08) 25%, rgba(200,75,49,0.15) 50%, rgba(200,75,49,0.08) 75%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .generate-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--accent) 0%, #e05a2b 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(200,75,49,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(200,75,49,0.4);
+  }
+
+  .generate-btn:active { transform: translateY(0); }
+
+  .generate-btn .btn-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .record-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .record-btn {
+    flex: 1;
+    padding: 9px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-size: 12px;
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .record-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
+
+  /* ===== SIDEBAR STATS ===== */
+  .stats-card .card-body {
+    padding: 16px;
+  }
+
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .stat-item:last-child { border-bottom: none; }
+
+  .stat-label { font-size: 13px; color: var(--text-secondary); }
+  .stat-value { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; color: var(--accent); }
+
+  .stat-bar {
+    height: 6px;
+    background: var(--border-light);
+    border-radius: 3px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ===== ADD DISH FORM ===== */
+  .add-dish-section {
+    margin-bottom: 32px;
+  }
+
+  .add-dish-form {
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr 120px auto;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .form-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+  .form-input, .form-select {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Noto Sans SC', sans-serif;
+    background: #fff;
+    color: var(--text-primary);
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-input:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(200,75,49,0.1);
+  }
+
+  .add-btn {
+    padding: 10px 20px;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(74,124,89,0.3);
+  }
+
+  .add-btn:hover { background: #3d6a4a; transform: translateY(-1px); }
+
+  /* ===== CALENDAR SECTION ===== */
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .month-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: var(--text-secondary);
+  }
+
+  .nav-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,75,49,0.05); }
+
+  .month-year {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    min-width: 200px;
+    text-align: center;
+  }
+
+  .today-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1.5px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    font-size: 12px;
+    font-family: 'Noto Sans SC', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .today-btn:hover { background: var(--accent); color: #fff; }
+
+  /* Weekday headers */
+  .weekday-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: linear-gradient(180deg, rgba(45,31,15,0.04) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .weekday-label {
+    padding: 10px 4px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+
+  .weekday-label:nth-child(7) { color: var(--accent); }
+  .weekday-label:nth-child(1) { color: var(--text-muted); }
+
+  /* Calendar grid */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .calendar-day {
+    min-height: 140px;
+    border-right: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    padding: 8px;
+    position: relative;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .calendar-day:nth-child(7n) { border-right: none; }
+
+  .calendar-day:hover { background: var(--bg-card-hover); }
+
+  .calendar-day.other-month .day-number { color: var(--border); }
+
+  .calendar-day.today .day-number {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calendar-day.has-today-marker::after {
+    content: '◀';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 9px;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+
+  .day-number {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    line-height: 26px;
+    padding-left: 2px;
+  }
+
+  .day-meals {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .day-meal-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 3px 5px;
+    border-radius: 6px;
+    font-size: 10px;
+    line-height: 1.4;
+    position: relative;
+  }
+
+  .day-meal-row.breakfast { background: rgba(224,123,57,0.08); }
+  .day-meal-row.lunch { background: rgba(200,75,49,0.08); }
+  .day-meal-row.dinner { background: rgba(123,79,166,0.08); }
+
+  .meal-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .breakfast .meal-dot { background: var(--breakfast); }
+  .lunch .meal-dot { background: var(--lunch); }
+  .dinner .meal-dot { background: var(--dinner); }
+
+  .meal-content { flex: 1; overflow: hidden; }
+
+  .meal-staple { color: var(--text-secondary); font-size: 9.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .meal-dishes { color: var(--text-primary); font-size: 10px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* ===== DETAIL PANEL (Slide-in) ===== */
+  .detail-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(45,31,15,0.4);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .detail-overlay.active { opacity: 1; pointer-events: all; }
+
+  .detail-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 480px;
+    max-width: 95vw;
+    background: var(--bg-card);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+  }
+
+  .detail-overlay.active .detail-panel { transform: translateX(0); }
+
+  .detail-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #2d1f0f, #4a2e18);
+    color: #fff;
+  }
+
+  .detail-date {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #f5deb3;
+  }
+
+  .detail-weekday { font-size: 12px; color: rgba(245,222,179,0.6); margin-top: 2px; }
+
+  .close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(245,222,179,0.3);
+    background: transparent;
+    color: #f5deb3;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .close-btn:hover { background: rgba(245,222,179,0.15); border-color: rgba(245,222,179,0.6); }
+
+  .detail-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+  }
+
+  .detail-section { margin-bottom: 24px; }
+
+  .detail-section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .detail-section-title .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border-light);
+    font-size: 14px;
+  }
+
+  .detail-item:last-child { border-bottom: none; }
+
+  .detail-type-badge {
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    font-weight: 500;
+  }
+
+  .detail-type-badge.staple { background: var(--yellow-light); color: var(--yellow); }
+  .detail-type-badge.dish { background: var(--green-light); color: var(--green); }
+
+  .detail-item-name { color: var(--text-primary); flex: 1; }
+  .detail-item-right { color: var(--text-muted); font-size: 12px; }
+
+  .delete-meal-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .delete-meal-btn:hover { color: var(--accent); background: rgba(200,75,49,0.1); }
+
+  .detail-add-form {
+    margin-top: 12px;
+    padding: 12px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid var(--border-light);
+  }
+
+  .detail-add-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .detail-add-row:last-child { margin-bottom: 0; }
+
+  .quick-add-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-size: 12px;
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .quick-add-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .empty-detail {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+  }
+
+  .empty-detail .empty-emoji { font-size: 60px; display: block; margin-bottom: 16px; opacity: 0.4; }
+  .empty-detail p { font-size: 14px; line-height: 2; }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #2d1f0f;
+    color: #f5deb3;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-family: 'Noto Sans SC', sans-serif;
+    z-index: 999;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+    pointer-events: none;
+  }
+
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ===== LEGEND ===== */
+  .calendar-legend {
+    display: flex;
+    gap: 16px;
+    padding: 10px 24px;
+    border-top: 1px solid var(--border-light);
+    font-size: 11px;
+    color: var(--text-muted);
+    align-items: center;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .top-section { grid-template-columns: 1fr; }
+    .add-dish-form { grid-template-columns: 1fr 1fr; }
+    .calendar-day { min-height: 100px; }
+  }
+
+  @media (max-width: 600px) {
+    .add-dish-form { grid-template-columns: 1fr; }
+    .calendar-day { min-height: 80px; padding: 4px; }
+    .day-meals { gap: 2px; }
+    .meal-staple, .meal-dishes { font-size: 9px; }
+    .detail-panel { width: 100vw; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+  /* Select meal type color indicator */
+  .meal-type-select { position: relative; }
+  .meal-type-select::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* Scrollbar for detail body */
+  .detail-body::-webkit-scrollbar { width: 4px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🍜</div>
+      <div>
+        <div class="logo-text">每日食记</div>
+        <div class="logo-sub">家庭食谱工具</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="live-time">
+        <div class="live-date" id="liveDate"></div>
+        <div class="live-clock" id="liveClock">--:--:--</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main-container">
+
+  <!-- TOP: Randomizer + Stats -->
+  <div class="top-section">
+
+    <!-- Randomizer -->
+    <div class="card randomizer-card">
+      <div class="card-header">
+        <span class="card-header-icon">🎲</span>
+        <span class="card-title">今日吃什么</span>
+      </div>
+      <div class="randomizer-body">
+        <div class="meal-selector">
+          <button class="meal-btn active-breakfast" data-meal="breakfast">
+            <span class="meal-emoji">🌅</span>
+            <span class="meal-label">早餐</span>
+          </button>
+          <button class="meal-btn" data-meal="lunch">
+            <span class="meal-emoji">☀️</span>
+            <span class="meal-label">午餐</span>
+          </button>
+          <button class="meal-btn" data-meal="dinner">
+            <span class="meal-emoji">🌙</span>
+            <span class="meal-label">晚餐</span>
+          </button>
+        </div>
+        <div class="random-result" id="randomResult">
+          <div class="result-placeholder">
+            <span class="big-emoji">🍽️</span>
+            选择餐次，点击按钮<br>看看今天吃什么
+          </div>
+        </div>
+        <button class="generate-btn" id="generateBtn">
+          <span class="btn-inner">🎰 今天吃什么</span>
+        </button>
+        <div class="record-actions">
+          <button class="record-btn" id="recordMainBtn">➕ 记入主食</button>
+          <button class="record-btn" id="recordDishBtn">➕ 记入菜肴</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Sidebar -->
+    <div>
+      <div class="card stats-card">
+        <div class="card-header">
+          <span class="card-header-icon">📊</span>
+          <span class="card-title">本月统计</span>
+        </div>
+        <div class="card-body">
+          <div class="stat-item">
+            <span class="stat-label">记录天数</span>
+            <span class="stat-value" id="statDays">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">收录菜品</span>
+            <span class="stat-value" id="statDishes">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">早餐天数</span>
+            <span class="stat-value" id="statBreakfast">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">午餐天数</span>
+            <span class="stat-value" id="statLunch">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">晚餐天数</span>
+            <span class="stat-value" id="statDinner">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD DISH FORM -->
+  <div class="card add-dish-section">
+    <div class="card-header">
+      <span class="card-header-icon">📝</span>
+      <span class="card-title">添加菜品到备选池</span>
+    </div>
+    <div class="add-dish-form">
+      <div>
+        <div class="form-label">餐次</div>
+        <select class="form-select" id="addMealType">
+          <option value="breakfast">🌅 早餐</option>
+          <option value="lunch">☀️ 午餐</option>
+          <option value="dinner">🌙 晚餐</option>
+        </select>
+      </div>
+      <div>
+        <div class="form-label">菜品名称</div>
+        <input class="form-input" id="addDishName" placeholder="例如：番茄炒蛋" maxlength="30">
+      </div>
+      <div>
+        <div class="form-label">类别</div>
+        <select class="form-select" id="addDishCategory">
+          <option value="dish">🥬 菜肴</option>
+          <option value="staple">🍚 主食</option>
+        </select>
+      </div>
+      <div>
+        <div class="form-label">日期（默认今天）</div>
+        <input class="form-input" type="date" id="addDishDate">
+      </div>
+      <div>
+        <div class="form-label">&nbsp;</div>
+        <button class="add-btn" id="addDishBtn">✓ 添加</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="card">
+    <div class="calendar-header">
+      <div class="month-nav">
+        <button class="nav-btn" id="prevMonth">◀</button>
+        <div class="month-year" id="monthYear"></div>
+        <button class="nav-btn" id="nextMonth">▶</button>
+      </div>
+      <button class="today-btn" id="todayBtn">◉ 回到今天</button>
+    </div>
+    <div class="weekday-row">
+      <div class="weekday-label">周日</div>
+      <div class="weekday-label">周一</div>
+      <div class="weekday-label">周二</div>
+      <div class="weekday-label">周三</div>
+      <div class="weekday-label">周四</div>
+      <div class="weekday-label">周五</div>
+      <div class="weekday-label">周六</div>
+    </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
+    <div class="calendar-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--breakfast)"></div> 早餐</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--lunch)"></div> 午餐</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--dinner)"></div> 晚餐</div>
+      <div class="legend-item" style="margin-left:auto;opacity:0.6">点击日期查看详情 / 添加记录</div>
+    </div>
+  </div>
+</main>
+
+<!-- DETAIL PANEL -->
+<div class="detail-overlay" id="detailOverlay">
+  <div class="detail-panel" id="detailPanel">
+    <div class="detail-header">
+      <div>
+        <div class="detail-date" id="detailDate"></div>
+        <div class="detail-weekday" id="detailWeekday"></div>
+      </div>
+      <button class="close-btn" id="closeDetail">✕</button>
+    </div>
+    <div class="detail-body" id="detailBody"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA STORE =====
+const STORE_KEY = 'daily_meals_v2';
+const POOL_KEY = 'dish_pool_v2';
+const DISHES_KEY = 'all_dishes_v2';
+
+let store = {};
+let dishPool = { breakfast: [], lunch: [], dinner: [] };
+let allDishes = [];
+let currentMonth = new Date().getFullYear();
+let currentMonthIdx = new Date().getMonth();
+let selectedMealType = 'breakfast';
+let selectedDate = null;
+
+// ===== CHINESE DISH DATABASE =====
+const DEFAULT_BREAKFAST_STAPLES = [
+  '白粥', '小米粥', '豆浆', '纯牛奶', '鲜牛奶',
+  '馒头', '花卷', '包子', '肉包', '菜包', '豆沙包',
+  '油条', '煎饼', '鸡蛋饼', '葱油饼', '手抓饼',
+  '面条', '馄饨', '饺子', '肠粉', '烧麦',
+  '全麦面包', '吐司', '燕麦片', '玉米糊', '红薯'
+];
+
+const DEFAULT_BREAKFAST_DISHES = [
+  '煮鸡蛋', '煎鸡蛋', '荷包蛋', '茶叶蛋', '蒸蛋羹',
+  '肉松', '榨菜', '酸豆角', '酱黄瓜', '花生米',
+  '凉拌黄瓜', '蒜蓉西兰花', '清炒时蔬', '小葱拌豆腐',
+  '番茄炒蛋', '青椒炒蛋', '火腿煎蛋', '虾皮蒸蛋',
+  '红油腐乳', '皮蛋瘦肉粥配小菜', '咸鸭蛋'
+];
+
+const DEFAULT_LUNCH_STAPLES = [
+  '白米饭', '杂粮饭', '糙米饭', '馒头', '花卷', '面条',
+  '炒饭', '炒面', '拌面', '包子', '饺子', '烙饼'
+];
+
+const DEFAULT_LUNCH_DISHES = [
+  '番茄炒蛋', '青椒肉丝', '鱼香肉丝', '宫保鸡丁', '糖醋里脊',
+  '红烧肉', '红烧排骨', '红烧鱼', '清蒸鱼', '酸菜鱼',
+  '麻婆豆腐', '家常豆腐', '地三鲜', '干煸四季豆', '炒茄子',
+  '蒜蓉西兰花', '清炒时蔬', '凉拌木耳', '凉拌黄瓜',
+  '西红柿鸡蛋汤', '紫菜蛋花汤', '酸辣汤', '冬瓜排骨汤',
+  '可乐鸡翅', '土豆烧牛肉', '咖喱土豆', '回锅肉',
+  '京酱肉丝', '木须肉', '虾仁炒蛋', '清炒虾仁'
+];
+
+const DEFAULT_DINNER_DISHES = [
+  '红烧肉', '糖醋排骨', '清蒸鲈鱼', '红烧鲫鱼', '酸菜鱼',
+  '蒜蓉蒸虾', '白灼虾', '可乐鸡翅', '黄焖鸡', '大盘鸡',
+  '番茄炒蛋', '蒜蓉西兰花', '清炒时蔬', '凉拌秋葵',
+  '麻婆豆腐', '鱼香茄子', '干煸四季豆', '炒土豆丝',
+  '酸辣土豆丝', '青椒炒蛋', '韭黄炒蛋', '苦瓜炒蛋',
+  '玉米排骨汤', '莲藕排骨汤', '山药鸡汤', '萝卜牛腩',
+  '京酱肉丝', '木须肉', '肉末豆腐', '蚂蚁上树',
+  '酸辣白菜', '手撕包菜', '干锅花菜', '小炒肉'
+];
+
+// ===== INIT =====
+function init() {
+  loadData();
+  initDefaultPool();
+  setDefaultDate();
+  updateClock();
+  setInterval(updateClock, 1000);
+  renderCalendar();
+  updateStats();
+  bindEvents();
+}
+
+function initDefaultPool() {
+  if (dishPool.breakfast.length === 0) {
+    dishPool.breakfast = [
+      ...DEFAULT_BREAKFAST_STAPLES.map(n => ({ name: n, type: 'staple' })),
+      ...DEFAULT_BREAKFAST_DISHES.map(n => ({ name: n, type: 'dish' }))
+    ];
+  }
+  if (dishPool.lunch.length === 0) {
+    dishPool.lunch = [
+      ...DEFAULT_LUNCH_STAPLES.map(n => ({ name: n, type: 'staple' })),
+      ...DEFAULT_LUNCH_DISHES.map(n => ({ name: n, type: 'dish' }))
+    ];
+  }
+  if (dishPool.dinner.length === 0) {
+    dishPool.dinner = [
+      ...DEFAULT_LUNCH_STAPLES.map(n => ({ name: n, type: 'staple' })),
+      ...DEFAULT_DINNER_DISHES.map(n => ({ name: n, type: 'dish' }))
+    ];
+  }
+  saveData();
+}
+
+function setDefaultDate() {
+  const today = formatDateKey(new Date());
+  document.getElementById('addDishDate').value = today;
+}
+
+function loadData() {
+  try {
+    const s = localStorage.getItem(STORE_KEY);
+    store = s ? JSON.parse(s) : {};
+    const p = localStorage.getItem(POOL_KEY);
+    dishPool = p ? JSON.parse(p) : { breakfast: [], lunch: [], dinner: [] };
+    const d = localStorage.getItem(DISHES_KEY);
+    allDishes = d ? JSON.parse(d) : [];
+  } catch(e) {
+    store = {};
+    dishPool = { breakfast: [], lunch: [], dinner: [] };
+    allDishes = [];
+  }
+}
+
+function saveData() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(store));
+  localStorage.setItem(POOL_KEY, JSON.stringify(dishPool));
+  localStorage.setItem(DISHES_KEY, JSON.stringify(allDishes));
+}
+
+// ===== CLOCK =====
+function updateClock() {
+  const now = new Date();
+  const days = ['周日','周一','周二','周三','周四','周五','周六'];
+  const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  document.getElementById('liveDate').textContent =
+    `${now.getFullYear()}年 ${months[now.getMonth()]} ${now.getDate()}日 ${days[now.getDay()]}`;
+  document.getElementById('liveClock').textContent =
+    String(now.getHours()).padStart(2,'0') + ':' +
+    String(now.getMinutes()).padStart(2,'0') + ':' +
+    String(now.getSeconds()).padStart(2,'0');
+}
+
+// ===== CALENDAR =====
+function renderCalendar() {
+  const grid = document.getElementById('calendarGrid');
+  const year = currentMonth;
+  const month = currentMonthIdx;
+  const today = new Date();
+  const todayKey = formatDateKey(today);
+
+  document.getElementById('monthYear').textContent =
+    `${year}年 ${month + 1}月`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+  let html = '';
+
+  // Prev month days
+  for (let i = firstDay - 1; i >= 0; i--) {
+    const d = daysInPrevMonth - i;
+    const prevM = month === 0 ? 11 : month - 1;
+    const prevY = month === 0 ? year - 1 : year;
+    html += `<div class="calendar-day other-month" data-date="${prevY}-${String(prevM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}">
+      <div class="day-number">${d}</div>
+      <div class="day-meals"></div>
+    </div>`;
+  }
+
+  // Current month days
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateKey = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday = dateKey === todayKey;
+    const meals = store[dateKey] || {};
+    const hasMeals = Object.keys(meals).some(k => meals[k] && meals[k].length > 0);
+
+    let mealsHtml = '';
+    for (const mealType of ['breakfast','lunch','dinner']) {
+      const items = meals[mealType] || [];
+      if (items.length === 0) continue;
+      const staple = items.find(i => i.type === 'staple');
+      const dishes = items.filter(i => i.type === 'dish');
+      if (staple || dishes.length > 0) {
+        mealsHtml += `<div class="day-meal-row ${mealType}">
+          <div class="meal-dot"></div>
+          <div class="meal-content">
+            ${staple ? `<div class="meal-staple">${staple.name}</div>` : ''}
+            ${dishes.length > 0 ? `<div class="meal-dishes">${dishes.map(d=>d.name).join('、')}</div>` : ''}
+          </div>
+        </div>`;
+      }
+    }
+
+    html += `<div class="calendar-day${isToday?' today':''}${isToday&&hasMeals?' has-today-marker':''}" data-date="${dateKey}">
+      <div class="day-number">${d}</div>
+      <div class="day-meals">${mealsHtml}</div>
+    </div>`;
+  }
+
+  // Next month days
+  const totalCells = firstDay + daysInMonth;
+  const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+  for (let d = 1; d <= remaining; d++) {
+    const nextM = month === 11 ? 0 : month + 1;
+    const nextY = month === 11 ? year + 1 : year;
+    html += `<div class="calendar-day other-month" data-date="${nextY}-${String(nextM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}">
+      <div class="day-number">${d}</div>
+      <div class="day-meals"></div>
+    </div>`;
+  }
+
+  grid.innerHTML = html;
+}
+
+function formatDateKey(date) {
+  const y = date instanceof Date ? date.getFullYear() : date.getFullYear();
+  const m = date instanceof Date ? date.getMonth() : date.getMonth();
+  const d = date instanceof Date ? date.getDate() : date.getDate();
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+}
+
+// ===== STATS =====
+function updateStats() {
+  const now = new Date();
+  const currentMonthKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  let daysWithMeals = 0;
+  let breakfastDays = 0, lunchDays = 0, dinnerDays = 0;
+  let totalDishes = 0;
+
+  for (const [dateKey, meals] of Object.entries(store)) {
+    if (!dateKey.startsWith(currentMonthKey)) continue;
+    const hasBreakfast = meals.breakfast && meals.breakfast.length > 0;
+    const hasLunch = meals.lunch && meals.lunch.length > 0;
+    const hasDinner = meals.dinner && meals.dinner.length > 0;
+    if (hasBreakfast || hasLunch || hasDinner) daysWithMeals++;
+    if (hasBreakfast) breakfastDays++;
+    if (hasLunch) lunchDays++;
+    if (hasDinner) dinnerDays++;
+  }
+
+  for (const type of ['breakfast','lunch','dinner']) {
+    totalDishes += (dishPool[type] || []).length;
+  }
+
+  document.getElementById('statDays').textContent = daysWithMeals;
+  document.getElementById('statDishes').textContent = totalDishes;
+  document.getElementById('statBreakfast').textContent = breakfastDays;
+  document.getElementById('statLunch').textContent = lunchDays;
+  document.getElementById('statDinner').textContent = dinnerDays;
+}
+
+// ===== GENERATE RANDOM =====
+function generate() {
+  const pool = dishPool[selectedMealType] || [];
+  if (pool.length === 0) {
+    showToast('备选池为空，请先添加菜品！');
+    return;
+  }
+
+  const resultEl = document.getElementById('randomResult');
+  resultEl.classList.remove('has-result');
+  resultEl.innerHTML = `<div class="shimmer" style="position:absolute;inset:0;border-radius:12px;"></div>`;
+
+  setTimeout(() => {
+    const staples = pool.filter(i => i.type === 'staple');
+    const dishes = pool.filter(i => i.type === 'dish');
+
+    const staple = staples.length > 0 ? staples[Math.floor(Math.random() * staples.length)] : null;
+    const dishCount = selectedMealType === 'breakfast' ? 2 : 3;
+    const selectedDishes = [];
+    const avail = [...dishes];
+    for (let i = 0; i < Math.min(dishCount, avail.length); i++) {
+      const idx = Math.floor(Math.random() * avail.length);
+      selectedDishes.push(avail.splice(idx, 1)[0]);
+    }
+
+    const mealLabels = { breakfast:'早餐', lunch:'午餐', dinner:'晚餐' };
+    const mealColors = { breakfast:'var(--breakfast)', lunch:'var(--lunch)', dinner:'var(--dinner)' };
+    const mealEmojis = { breakfast:'🌅', lunch:'☀️', dinner:'🌙' };
+
+    let html = `<div class="result-dish">${mealEmojis[selectedMealType]} ${mealLabels[selectedMealType]}</div>`;
+    if (staple) {
+      html += `<div class="result-detail">
+        <span class="result-tag staple">🍚 ${staple.name}</span>
+      </div>`;
+    }
+    if (selectedDishes.length > 0) {
+      html += `<div class="result-detail">`;
+      selectedDishes.forEach(d => {
+        html += `<span class="result-tag dish">🥬 ${d.name}</span>`;
+      });
+      html += `</div>`;
+    }
+
+    resultEl.classList.add('has-result');
+    resultEl.innerHTML = html;
+
+    // Store last generated for quick record
+    window._lastGenerated = { staple, dishes: selectedDishes, mealType: selectedMealType };
+
+  }, 600);
+}
+
+// ===== ADD DISH =====
+function addDish() {
+  const mealType = document.getElementById('addMealType').value;
+  const name = document.getElementById('addDishName').value.trim();
+  const category = document.getElementById('addDishCategory').value;
+  const dateVal = document.getElementById('addDishDate').value;
+
+  if (!name) { showToast('请输入菜品名称'); return; }
+  if (!dateVal) { showToast('请选择日期'); return; }
+
+  const entry = { name, type: category };
+  const dateKey = dateVal;
+
+  // Add to pool
+  if (!dishPool[mealType]) dishPool[mealType] = [];
+  if (!dishPool[mealType].find(i => i.name === name)) {
+    dishPool[mealType].push(entry);
+  }
+
+  // Add to store
+  if (!store[dateKey]) store[dateKey] = { breakfast:[], lunch:[], dinner:[] };
+  if (!store[dateKey][mealType]) store[dateKey][mealType] = [];
+  if (!store[dateKey][mealType].find(i => i.name === name)) {
+    store[dateKey][mealType].push(entry);
+  }
+
+  // Add to all dishes
+  if (!allDishes.find(d => d.name === name)) {
+    allDishes.push({ name, type: category, mealType });
+  }
+
+  saveData();
+  document.getElementById('addDishName').value = '';
+  renderCalendar();
+  updateStats();
+  showToast(`✓ 已添加「${name}」`);
+}
+
+function recordMain() {
+  if (window._lastGenerated && window._lastGenerated.staple) {
+    const { mealType } = window._lastGenerated;
+    const staple = window._lastGenerated.staple;
+    const today = formatDateKey(new Date());
+    if (!store[today]) store[today] = { breakfast:[], lunch:[], dinner:[] };
+    if (!store[today][mealType]) store[today][mealType] = [];
+    if (!store[today][mealType].find(i => i.name === staple.name)) {
+      store[today][mealType].push({ ...staple });
+    }
+    saveData();
+    renderCalendar();
+    updateStats();
+    showToast(`✓ 主食「${staple.name}」已记入今天${mealType==='breakfast'?'早餐':mealType==='lunch'?'午餐':'晚餐'}`);
+  } else {
+    showToast('先生成一份今日推荐再来记吧');
+  }
+}
+
+function recordDish() {
+  if (window._lastGenerated && window._lastGenerated.dishes && window._lastGenerated.dishes.length > 0) {
+    const { mealType, dishes } = window._lastGenerated;
+    const today = formatDateKey(new Date());
+    if (!store[today]) store[today] = { breakfast:[], lunch:[], dinner:[] };
+    if (!store[today][mealType]) store[today][mealType] = [];
+    let added = 0;
+    dishes.forEach(dish => {
+      if (!store[today][mealType].find(i => i.name === dish.name)) {
+        store[today][mealType].push({ ...dish });
+        added++;
+      }
+    });
+    saveData();
+    renderCalendar();
+    updateStats();
+    showToast(`✓ ${added}道菜肴已记入今天${mealType==='breakfast'?'早餐':mealType==='lunch'?'午餐':'晚餐'}`);
+  } else {
+    showToast('先生成一份今日推荐再来记吧');
+  }
+}
+
+// ===== DETAIL PANEL =====
+function openDetail(dateKey) {
+  selectedDate = dateKey;
+  const overlay = document.getElementById('detailOverlay');
+  const panel = document.getElementById('detailPanel');
+
+  const [y, m, d] = dateKey.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
+  const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+  document.getElementById('detailDate').textContent = `${y}年${months[m-1]}${d}日`;
+  document.getElementById('detailWeekday').textContent = weekdays[date.getDay()];
+
+  renderDetailBody(dateKey);
+  overlay.classList.add('active');
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('active');
+  selectedDate = null;
+}
+
+function renderDetailBody(dateKey) {
+  const body = document.getElementById('detailBody');
+  const meals = store[dateKey] || {};
+  const mealInfo = [
+    { key:'breakfast', label:'早餐', emoji:'🌅', color:'var(--breakfast)' },
+    { key:'lunch', label:'午餐', emoji:'☀️', color:'var(--lunch)' },
+    { key:'dinner', label:'晚餐', emoji:'🌙', color:'var(--dinner)' }
+  ];
+
+  let html = '';
+  let hasAny = false;
+
+  for (const mi of mealInfo) {
+    const items = meals[mi.key] || [];
+    hasAny = hasAny || items.length > 0;
+    html += `<div class="detail-section">
+      <div class="detail-section-title">
+        <div class="dot" style="background:${mi.color}"></div>
+        ${mi.emoji} ${mi.label}
+      </div>`;
+
+    if (items.length === 0) {
+      html += `<div style="color:var(--text-muted);font-size:13px;padding:8px 0;text-align:center">暂无记录</div>`;
+    } else {
+      const staples = items.filter(i => i.type === 'staple');
+      const dishes = items.filter(i => i.type === 'dish');
+      if (staples.length > 0) {
+        html += `<div style="font-size:11px;color:var(--yellow);font-weight:600;margin-bottom:4px;letter-spacing:2px">🍚 主食</div>`;
+        staples.forEach(item => {
+          html += `<div class="detail-item">
+            <span class="detail-item-name">${item.name}</span>
+            <button class="delete-meal-btn" onclick="deleteMeal('${dateKey}','${mi.key}','${item.name}')">✕</button>
+          </div>`;
+        });
+      }
+      if (dishes.length > 0) {
+        html += `<div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:4px;margin-top:8px;letter-spacing:2px">🥬 菜肴</div>`;
+        dishes.forEach(item => {
+          html += `<div class="detail-item">
+            <span class="detail-item-name">${item.name}</span>
+            <button class="delete-meal-btn" onclick="deleteMeal('${dateKey}','${mi.key}','${item.name}')">✕</button>
+          </div>`;
+        });
+      }
+    }
+
+    // Quick add
+    html += `<div class="detail-add-form">
+      <div class="detail-add-row">
+        <input class="form-input" id="quickName_${mi.key}" placeholder="输入菜品名称" maxlength="20" style="flex:1;font-size:13px;padding:8px 12px">
+        <select id="quickType_${mi.key}" style="border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;font-family:'Noto Sans SC',sans-serif;color:var(--text-secondary);background:#fff;width:90px">
+          <option value="dish">🥬 菜肴</option>
+          <option value="staple">🍚 主食</option>
+        </select>
+        <button class="quick-add-btn" onclick="quickAdd('${mi.key}')">添加</button>
+      </div>
+    </div>`;
+
+    html += `</div>`;
+  }
+
+  body.innerHTML = html;
+}
+
+function quickAdd(mealType) {
+  const input = document.getElementById(`quickName_${mealType}`);
+  const typeSelect = document.getElementById(`quickType_${mealType}`);
+  const name = input.value.trim();
+  if (!name || !selectedDate) return;
+
+  const entry = { name, type: typeSelect.value };
+
+  if (!store[selectedDate]) store[selectedDate] = { breakfast:[], lunch:[], dinner:[] };
+  if (!store[selectedDate][mealType]) store[selectedDate][mealType] = [];
+  if (!store[selectedDate][mealType].find(i => i.name === name)) {
+    store[selectedDate][mealType].push(entry);
+  }
+
+  if (!dishPool[mealType]) dishPool[mealType] = [];
+  if (!dishPool[mealType].find(i => i.name === name)) {
+    dishPool[mealType].push({ ...entry });
+  }
+
+  saveData();
+  renderDetailBody(selectedDate);
+  renderCalendar();
+  updateStats();
+  input.value = '';
+  showToast(`✓ 已添加「${name}」`);
+}
+
+function deleteMeal(dateKey, mealType, dishName) {
+  if (!store[dateKey] || !store[dateKey][mealType]) return;
+  store[dateKey][mealType] = store[dateKey][mealType].filter(i => i.name !== dishName);
+  saveData();
+  renderDetailBody(dateKey);
+  renderCalendar();
+  updateStats();
+  showToast(`已删除「${dishName}」`);
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ===== EVENTS =====
+function bindEvents() {
+  // Meal type selector
+  document.querySelectorAll('.meal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.meal-btn').forEach(b => {
+        b.classList.remove('active-breakfast','active-lunch','active-dinner');
+      });
+      selectedMealType = btn.dataset.meal;
+      btn.classList.add(`active-${selectedMealType}`);
+    });
+  });
+
+  // Generate
+  document.getElementById('generateBtn').addEventListener('click', generate);
+
+  // Add dish
+  document.getElementById('addDishBtn').addEventListener('click', addDish);
+  document.getElementById('addDishName').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addDish();
+  });
+
+  // Record
+  document.getElementById('recordMainBtn').addEventListener('click', recordMain);
+  document.getElementById('recordDishBtn').addEventListener('click', recordDish);
+
+  // Calendar navigation
+  document.getElementById('prevMonth').addEventListener('click', () => {
+    currentMonthIdx--;
+    if (currentMonthIdx < 0) { currentMonthIdx = 11; currentMonth--; }
+    renderCalendar();
+  });
+  document.getElementById('nextMonth').addEventListener('click', () => {
+    currentMonthIdx++;
+    if (currentMonthIdx > 11) { currentMonthIdx = 0; currentMonth++; }
+    renderCalendar();
+  });
+  document.getElementById('todayBtn').addEventListener('click', () => {
+    const now = new Date();
+    currentMonth = now.getFullYear();
+    currentMonthIdx = now.getMonth();
+    renderCalendar();
+  });
+
+  // Calendar day click
+  document.getElementById('calendarGrid').addEventListener('click', e => {
+    const day = e.target.closest('.calendar-day');
+    if (day) openDetail(day.dataset.date);
+  });
+
+  // Detail overlay close
+  document.getElementById('detailOverlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('detailOverlay')) closeDetail();
+  });
+  document.getElementById('closeDetail').addEventListener('click', closeDetail);
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetail();
+    if (e.key === 'Enter' && document.activeElement.id === 'addDishName') addDish();
+  });
+}
+
+init();
+</script>
+</body>
+</html>
